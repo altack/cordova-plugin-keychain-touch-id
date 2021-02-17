@@ -94,12 +94,12 @@ public class FingerprintAuthAux {
      */
     private static String mKeyID;
     KeyguardManager mKeyguardManager;
-    FingerprintAuthenticationDialogFragment mFragment;
+    com.cordova.plugin.android.fingerprintauth.FingerprintAuthenticationDialogFragment mFragment;
     private FingerprintManager mFingerPrintManager;
     private int mCurrentMode;
     private String mLangCode = "en_US";
 
-    private FingerprintAuth mParentCordovaPlugin;
+    private com.cordova.plugin.android.fingerprintauth.FingerprintAuth mParentCordovaPlugin;
     /**
      * String to encrypt
      */
@@ -113,7 +113,7 @@ public class FingerprintAuthAux {
     /**
      * Constructor.
      */
-    public FingerprintAuthAux(FingerprintAuth mainCordovaPlugin) {
+    public FingerprintAuthAux(com.cordova.plugin.android.fingerprintauth.FingerprintAuth mainCordovaPlugin) {
         mParentCordovaPlugin = mainCordovaPlugin;
     }
 
@@ -400,7 +400,7 @@ public class FingerprintAuthAux {
             return false;
         }
 
-        return mFingerPrintManager.isHardwareDetected();
+        return null != mFingerPrintManager && mFingerPrintManager.isHardwareDetected();
     }
 
     private boolean hasEnrolledFingerprints() {
@@ -408,7 +408,7 @@ public class FingerprintAuthAux {
             return false;
         }
 
-        return mFingerPrintManager.hasEnrolledFingerprints();
+        return null != mFingerPrintManager && mFingerPrintManager.hasEnrolledFingerprints();
     }
 
     /**
@@ -491,7 +491,7 @@ public class FingerprintAuthAux {
             public void run() {
                 // Set up the crypto object for later. The object will be authenticated by use
                 // of the fingerprint.
-                mFragment = new FingerprintAuthenticationDialogFragment();
+                mFragment = new com.cordova.plugin.android.fingerprintauth.FingerprintAuthenticationDialogFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("dialogMode", mode);
                 bundle.putString("dialogMessage", message);
